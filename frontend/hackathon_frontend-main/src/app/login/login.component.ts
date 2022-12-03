@@ -20,6 +20,8 @@ import { ApiService } from '../api.service';
   username!: String
   password!: String
 
+  disabled : boolean = false;
+
   public token!: string    // dodawaj do post put get :))
 
   routerLink: String = ''
@@ -44,11 +46,9 @@ import { ApiService } from '../api.service';
   postButtonClicked = () => {
     this.api.loginUser(this.username, this.password).subscribe(
       data => {
-        console.log(data)
-        this.token = data.token
-        this.api.token= data.token
-        this.routerLink='/plan';
-
+        this.api.token = data.token
+        this._router.navigate(['/plan'])
+      
       }, error => {
         console.log(error);
       }
